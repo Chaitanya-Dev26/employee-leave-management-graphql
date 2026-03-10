@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Requests - LeaveFlow</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+
+<body data-page="leaveRequests">
+    <aside class="sidebar">
+        <div class="sidebar-logo">LeaveFlow</div>
+        <nav class="sidebar-menu">
+            <a href="dashboard.html" class="menu-item"><i class="bi bi-people"></i> Dashboard</a>
+            <a href="apply-leave.html" class="menu-item"><i class="bi bi-person-add"></i> Apply Leave</a>
+            <a href="leave-requests.html" class="menu-item active"><i class="bi bi-clock"></i> Leave Requests</a>
+            <a href="leave-balance.html" class="menu-item"><i class="bi bi-list-ol"></i> Leave Balance</a>
+        </nav>
+        <div class="sidebar-footer">
+            <a href="#" class="menu-item"><i class="bi bi-gear"></i> Settings</a>
+            <a href="#" class="menu-item"><i class="bi bi-headset"></i> Help & Support</a>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <header class="top-bar">
+            <h1>Manage Leave Requests</h1>
+            <div class="top-bar-right">
+                <div class="notif-btn"><i class="bi bi-chat-left-text"></i></div>
+                <div class="profile-section">
+                    <i class="bi bi-person-circle" style="font-size: 1.5rem;"></i>
+                    <i class="bi bi-chevron-down" style="font-size: 0.8rem; margin-left: 5px;"></i>
+                </div>
+            </div>
+        </header>
+
+        <div class="content-area">
+            <section class="content-section">
+                <h2 class="section-title">Pending Applications</h2>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Employee</th>
+                                <th>Type</th>
+                                <th>Start Date</th>
+                                <th>End Date</th>
+                                <th>Days</th>
+                                <th>Reason</th>
+                                <th>Remaining Balance</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="requests-table-body">
+                            <!-- Content loaded via script.js -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

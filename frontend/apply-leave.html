@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apply Leave | LeaveFlow</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+
+<body data-page="applyLeave">
+    <aside class="sidebar">
+        <div class="sidebar-logo">LeaveFlow</div>
+        <nav class="sidebar-menu">
+            <a href="dashboard.html" class="menu-item"><i class="bi bi-people"></i> Dashboard</a>
+            <a href="apply-leave.html" class="menu-item active"><i class="bi bi-person-add"></i> Apply Leave</a>
+            <a href="leave-requests.html" class="menu-item"><i class="bi bi-clock"></i> Leave Requests</a>
+            <a href="leave-balance.html" class="menu-item"><i class="bi bi-list-ol"></i> Leave Balance</a>
+        </nav>
+        <div class="sidebar-footer">
+            <a href="#" class="menu-item"><i class="bi bi-gear"></i> Settings</a>
+            <a href="#" class="menu-item"><i class="bi bi-headset"></i> Help & Support</a>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <header class="top-bar">
+            <h1>Apply for Leave</h1>
+            <div class="top-bar-right">
+                <div class="notif-btn"><i class="bi bi-chat-left-text"></i></div>
+                <div class="profile-section">
+                    <i class="bi bi-person-circle" style="font-size: 1.5rem;"></i>
+                    <i class="bi bi-chevron-down" style="font-size: 0.8rem; margin-left: 10px;"></i>
+                </div>
+            </div>
+        </header>
+
+        <div class="content-area">
+            <div class="al-wrapper">
+                <!-- Section 1: Employee Identification -->
+                <section class="al-card">
+                    <h2 class="al-section-title">Employee Identification</h2>
+                    <p class="al-section-subtitle">Please enter your Employee ID to access your leave account.</p>
+
+                    <div class="al-id-row">
+                        <input type="number" id="employee-id" class="al-id-input"
+                            placeholder="Enter Employee ID (e.g. 2)" required>
+                        <button id="load-emp-btn" class="btn btn-primary">Load Profile</button>
+                    </div>
+                    <p class="al-helper-text">Entering your ID allows you to view available leave balances before
+                        submitting a request.</p>
+                </section>
+
+                <!-- Section 2: Leave Balance (Initially Locked) -->
+                <section id="balance-section" class="al-card al-locked">
+                    <h2 class="al-section-title">Leave Balance</h2>
+                    <p class="al-section-subtitle">Your remaining leave quotas for the current calendar year.</p>
+
+                    <div id="balance-list" class="al-balance-grid">
+                        <!-- Dynamic content populated by script.js -->
+                    </div>
+                </section>
+
+                <!-- Section 3: Leave Request Details (Initially Locked) -->
+                <section id="form-section" class="al-card al-locked">
+                    <h2 class="al-section-title">Leave Request Details</h2>
+                    <p class="al-section-subtitle">Complete the form below to submit your leave application for
+                        approval.</p>
+
+                    <form id="leave-form">
+                        <div class="al-form-grid">
+                            <div class="form-group al-full-width">
+                                <label for="leave-type">Leave Type</label>
+                                <select id="leave-type" required></select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="start-date">Start Date</label>
+                                <input type="date" id="start-date" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="end-date">End Date</label>
+                                <input type="date" id="end-date" required>
+                            </div>
+
+                            <div class="form-group al-full-width">
+                                <label for="reason">Reason for Leave</label>
+                                <textarea id="reason" rows="4"
+                                    placeholder="Briefly describe why you are taking this leave..."></textarea>
+                            </div>
+                        </div>
+
+                        <div style="margin-top: 1rem;">
+                            <button type="submit" class="btn btn-primary btn-block" style="padding: 1rem;">Submit Leave
+                                Request</button>
+                        </div>
+                    </form>
+                    <div id="form-message"></div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
