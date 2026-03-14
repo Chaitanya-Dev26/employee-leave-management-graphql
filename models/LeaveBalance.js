@@ -1,22 +1,20 @@
-class LeaveBalance {
-    constructor(db) {
-        this.db = db;
-    }
+// 1. Import Mongoose: This library handles our connection to the database.
+const mongoose = require('mongoose');
 
-    async findByEmployee(employeeId) {
-        return await this.db.all('SELECT * FROM LeaveBalance WHERE employee_id = ?', [employeeId]);
-    }
+// 2. The Blueprint (Schema): This tracks how many days someone has LEFT to take.
+const leaveBalanceSchema = new mongoose.Schema({
+    // A unique number for this specific balance record.
+    id: { type: Number, required: true, unique: true },
 
-    async findByEmployeeAndType(employeeId, leaveTypeId) {
-        return await this.db.get('SELECT * FROM LeaveBalance WHERE employee_id = ? AND leave_type_id = ?', [employeeId, leaveTypeId]);
-    }
+    // The ID of the employee this balance belongs to.
+    employee_id: { type: Number, required: true },
 
-    async updateBalance(employeeId, leaveTypeId, days) {
-        await this.db.run(
-            'UPDATE LeaveBalance SET remaining_days = remaining_days - ? WHERE employee_id = ? AND leave_type_id = ?',
-            [days, employeeId, leaveTypeId]
-        );
-    }
-}
+    // The ID of the leave type (Sick, Annual, etc.).
+    leave_type_id: { type: Number, required: true },
 
-module.exports = LeaveBalance;
+    // Total number of days the employee still has available to use.
+    remaining_days: { type: Number, required: true }
+});
+
+// 3. Export the Model: This makes the "LeaveBalance" list ready to use.
+module.exports = mongoose.model('LeaveBalance', leaveBalanceSchema);

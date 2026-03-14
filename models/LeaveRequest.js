@@ -1,40 +1,36 @@
-class LeaveRequest {
-    constructor(db) {
-        this.db = db;
-    }
+// 1. Import Mongoose: This helps us save and find leave requests in the database.
+const mongoose = require('mongoose');
 
-    async create(data) {
-        const { employeeId, leaveTypeId, startDate, endDate, reason } = data;
-        const result = await this.db.run(
-            'INSERT INTO LeaveRequest (employee_id, leave_type_id, start_date, end_date, reason) VALUES (?, ?, ?, ?, ?)',
-            [employeeId, leaveTypeId, startDate, endDate, reason]
-        );
-        return await this.findById(result.lastID);
-    }
+// 2. The Blueprint (Schema): This is the form someone fills out when they want a vacation.
+const leaveRequestSchema = new mongoose.Schema({
+    // A unique number for this specific request.
+    id: { type: Number, required: true, unique: true },
 
-    async findById(id) {
-        return await this.db.get('SELECT * FROM LeaveRequest WHERE id = ?', [id]);
-    }
+    // Who is asking for leave? (Their Employee ID number).
+    employee_id: { type: Number, required: true },
 
-    async findPending() {
-        return await this.db.all('SELECT * FROM LeaveRequest WHERE status = "pending"');
-    }
+    // What kind of leave is it? (Sick, Annual, etc.).
+    leave_type_id: { type: Number, required: true },
 
-    async updateStatus(id, status) {
-        await this.db.run('UPDATE LeaveRequest SET status = ? WHERE id = ?', [status, id]);
-        return await this.findById(id);
-    }
+    // When does the leave start?
+    start_date: { type: String, required: true },
 
-    async checkOverlap(employeeId, startDate, endDate) {
-        const overlap = await this.db.get(
-            `SELECT * FROM LeaveRequest 
-             WHERE employee_id = ? 
-             AND status NOT IN ('rejected', 'cancelled')
-             AND ((start_date <= ? AND end_date >= ?) OR (start_date <= ? AND end_date >= ?) OR (? <= start_date AND ? >= end_date))`,
-            [employeeId, startDate, startDate, endDate, endDate, startDate, endDate]
-        );
-        return overlap;
-    }
-}
+    // When does the leave end?
+    end_date: { type: String, required: true },
 
-module.exports = LeaveRequest;
+    // Why are they taking leave? (Optional).
+    reason: String,
+
+    // What is the progress? Starts at 'pending' until a manager decides.
+    status: {
+        type: String,
+        enum: ['pending', 'approved', 'rejected', 'cancelled'],
+        default: 'pending'
+    },
+
+    // The exact date and time the person clicked "Submit".
+    applied_at: { type: Date, default: Date.now }
+});
+
+// 3. Export the Model: This makes the "LeaveRequest" system live.
+module.exports = mongoose.model('LeaveRequest', leaveRequestSchema);
