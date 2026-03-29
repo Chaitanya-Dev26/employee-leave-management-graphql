@@ -4,6 +4,8 @@
 
 ---
 
+https://gist.github.com/user-attachments/assets/4a123777-8017-417e-8aa4-e3a6f3dff691
+
 ## 📋 Table of Contents
 
 - [Overview](#overview)
@@ -198,16 +200,6 @@ Seeded automatically on first run — no setup needed.
 | 1 | Alice Manager | manager | Approving / rejecting requests |
 | 2 | Bob Employee | employee | Applying for leave |
 | 3 | Charlie Dev | employee | Applying for leave |
-
----
-
-## Screenshots
-
-> _Add screenshots here after running the app locally._
-
-| Dashboard | Apply Leave | Manager Portal |
-|---|---|---|
-| `dashboard.html` | `apply-leave.html` | `leave-requests.html` |
 
 ---
 
