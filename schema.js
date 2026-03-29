@@ -1,5 +1,5 @@
 // 1. Import GQL: This is a special tool for building GraphQL APIs.
-const { gql } = require('apollo-server-express');
+const { gql } = require('graphql-tag');
 
 // 2. The Schema: This is like the "Table of Contents" for your API.
 // It defines what kinds of data the frontend is allowed to ask for.
