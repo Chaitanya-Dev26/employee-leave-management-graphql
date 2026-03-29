@@ -1,5 +1,5 @@
-// 1. The Address: This is where our Backend server is living.
-const GRAPHQL_URL = 'http://localhost:4000/graphql';
+// 1. The Address: Automatically detects whether we're on localhost or deployed (e.g. Vercel).
+const GRAPHQL_URL = `${window.location.origin}/graphql`;
 
 // 2. The Messenger: This function takes a request and sends it to the Backend.
 async function runGraphQL(query, variables = {}) {
